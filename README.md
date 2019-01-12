@@ -1,4 +1,4 @@
-# rimworld_mod_anyplant
+# AnyPlant
 Silly mod for Rimworld. Plant anything in a pot.
 
 Known bugs:
