@@ -1,0 +1,1864 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <ThingDef ParentName="FurnitureWithQualityBase">
+        <defName>AnyPlantPot</defName>
+        <label>AnyPlant Pot</label>
+        <description>A specially engineered planter with an adjustable reservoir for excess water. This prevents overwatering, and with the correct settings, this pot can support the growth of nearly any plant. It's rather expensive to build, but if you can dream it, this can grow it, provided the light levels and temperature are correct.</description>
+        <thingClass>Building_PlantGrower</thingClass>
+        <graphicData>
+            <texPath>Things/Building/Furniture/PlantPot</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shadowData>
+                <volume>(0.55, 0.35, 0.3)</volume>
+                <offset>(0, 0, -0.28)</offset>
+            </shadowData>
+            <damageData>
+                <rect>(0.2,0.2,0.6,0.6)</rect>
+            </damageData>
+        </graphicData>
+        <altitudeLayer>Building</altitudeLayer>
+        <researchPrerequisites>
+            <li>AnyPlant_Research_Drainage</li>
+        </researchPrerequisites>
+        <passability>PassThroughOnly</passability>
+        <fillPercent>0.20</fillPercent>
+        <statBases>
+            <MaxHitPoints>100</MaxHitPoints>
+            <WorkToBuild>200</WorkToBuild>
+            <Mass>2</Mass>
+            <Flammability>1.0</Flammability>
+        </statBases>
+        <stuffCategories>
+            <li>Metallic</li>
+            <li>Woody</li>
+            <li>Stony</li>
+        </stuffCategories>
+        <costStuffCount>50</costStuffCount>
+        <costList>
+            <ComponentIndustrial>1</ComponentIndustrial>
+        </costList>
+        <comps>
+            <li Class="CompProperties_Forbiddable"/>
+        </comps>
+        <fertility>1.0</fertility>
+        <designationHotKey>Misc9</designationHotKey>
+        <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+        <building>
+            <defaultPlantToGrow>AnyPlant_Plant_Rose</defaultPlantToGrow>
+            <sowTag>alleZSoyez_AnyPlant</sowTag>
+        </building>
+        <rotatable>false</rotatable>
+        <uiIconOffset>(0, -0.05)</uiIconOffset>
+    </ThingDef>
+    <!--======================PLANT BASES=======================-->
+    <!--own plant base because i'm lazy-->
+    <ThingDef Name="AnyPlant_PlantBase" Abstract="True">
+        <category>Plant</category>
+        <thingClass>Plant</thingClass>
+        <useHitPoints>True</useHitPoints>
+        <statBases>
+            <Flammability>1</Flammability>
+        </statBases>
+        <tickerType>Long</tickerType>
+        <altitudeLayer>Item</altitudeLayer>
+        <selectable>true</selectable>
+        <neverMultiSelect>false</neverMultiSelect>
+        <drawerType>MapMeshOnly</drawerType>
+        <pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
+        <graphicData>
+            <graphicClass>Graphic_Random</graphicClass>
+            <shaderType>CutoutPlant</shaderType>
+        </graphicData>
+        <ingestible>
+            <foodType>Plant</foodType>
+            <preferability>RawBad</preferability>
+        </ingestible>
+        <plant>
+            <fertilityMin>0.7</fertilityMin>
+            <fertilitySensitivity>1.0</fertilitySensitivity>
+            <soundHarvesting>Harvest_Standard</soundHarvesting>
+            <soundHarvestFinish>Harvest_Standard_Finish</soundHarvestFinish>
+            <sowWork>170</sowWork>
+            <growMinGlow>0.4</growMinGlow>
+            <harvestWork>250</harvestWork>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>1.05</max>
+            </visualSizeRange>
+            <topWindExposure>0.1</topWindExposure>
+            <harvestFailable>true</harvestFailable>
+            <blockAdjacentSow>false</blockAdjacentSow>
+        </plant>
+    </ThingDef>
+    <!--bush base-->
+    <ThingDef ParentName="AnyPlant_PlantBase" Name="AnyPlant_BushBase" Abstract="True">
+        <statBases>
+            <MaxHitPoints>120</MaxHitPoints>
+            <Nutrition>0.3</Nutrition>
+        </statBases>
+        <graphicData>
+            <shadowData>
+                <volume>(0.55, 0.2, 0.2)</volume>
+                <offset>(0,0,-0.25)</offset>
+            </shadowData>
+        </graphicData>
+        <altitudeLayer>Item</altitudeLayer>
+        <selectable>true</selectable>
+        <neverMultiSelect>false</neverMultiSelect>
+        <fillPercent>0.20</fillPercent>
+        <pathCost>30</pathCost>
+        <ingestible />
+        <plant>
+            <fertilitySensitivity>0.5</fertilitySensitivity>
+            <growDays>3</growDays>
+            <growMinGlow>0.4</growMinGlow>
+            <topWindExposure>0.20</topWindExposure>
+            <harvestFailable>true</harvestFailable>
+        </plant>
+    </ThingDef>
+    <!--own cave base-->
+    <ThingDef Name="AnyPlant_CavePlantBase" ParentName="AnyPlant_PlantBase" Abstract="True">
+        <altitudeLayer>Item</altitudeLayer>
+        <selectable>true</selectable>
+        <neverMultiSelect>false</neverMultiSelect>
+        <plant>
+            <neverBlightable>false</neverBlightable>
+            <growMinGlow>0</growMinGlow>
+            <growOptimalGlow>0</growOptimalGlow>
+            <cavePlant>false</cavePlant>
+            <harvestFailable>false</harvestFailable>
+        </plant>
+    </ThingDef>
+    <!--own treebase so can plant trees under a roof/adjust some properties-->
+    <ThingDef ParentName="AnyPlant_PlantBase" Name="AnyPlant_TreeBase" Abstract="True">
+        <statBases>
+            <MaxHitPoints>200</MaxHitPoints>
+            <Flammability>0.8</Flammability>
+            <Nutrition>1.7</Nutrition>
+        </statBases>
+        <altitudeLayer>Item</altitudeLayer>
+        <selectable>true</selectable>
+        <neverMultiSelect>false</neverMultiSelect>
+        <fillPercent>0.25</fillPercent>
+        <graphicData>
+            <shadowData>
+                <volume>(0.2, 0.35, 0.13)</volume>
+                <offset>(0,0,-0.42)</offset>
+            </shadowData>
+        </graphicData>
+        <passability>PassThroughOnly</passability>
+        <pathCost>130</pathCost>
+        <blockWind>false</blockWind>
+        <ingestible>
+            <foodType>Tree</foodType>
+            <preferability>RawBad</preferability>
+        </ingestible>
+        <plant>
+            <lifespanDaysPerGrowDays>9</lifespanDaysPerGrowDays>
+            <fertilitySensitivity>0.5</fertilitySensitivity>
+            <soundHarvesting>Harvest_Tree</soundHarvesting>
+            <soundHarvestFinish>Harvest_Tree_Finish</soundHarvestFinish>
+            <sowWork>1000</sowWork>
+            <sowMinSkill>6</sowMinSkill>
+            <growMinGlow>0.4</growMinGlow>
+            <sowResearchPrerequisites>
+                <li>TreeSowing</li>
+            </sowResearchPrerequisites>
+            <harvestWork>400</harvestWork>
+            <blockAdjacentSow>false</blockAdjacentSow>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>1.05</max>
+            </visualSizeRange>
+            <interferesWithRoof>false</interferesWithRoof>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_TreeBase" Name="AnyPlant_DeciduousTreeBase" Abstract="True">
+        <graphicData>
+            <shaderParameters>
+                <_FallColorSource>(0.3803, 0.4352, 0.1451)</_FallColorSource>
+                <_FallColorDestination>/Other/TreeFallGradient</_FallColorDestination>
+                <_FallTransitionRange>(0.02, 0.10)</_FallTransitionRange>
+                <_FallBehaviorEnabled>1</_FallBehaviorEnabled>
+            </shaderParameters>
+        </graphicData>
+    </ThingDef>
+    <!--healroot base because of course this is a thing-->
+    <ThingDef ParentName="AnyPlant_PlantBase" Name="HealrootBase" Abstract="True">
+        <statBases>
+            <MaxHitPoints>60</MaxHitPoints>
+            <Nutrition>0.15</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/Healroot</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/Healroot</uiIconPath>
+        <ingestible />
+        <plant>
+            <growDays>5</growDays>
+            <dieIfLeafless>false</dieIfLeafless>
+            <harvestWork>400</harvestWork>
+            <harvestTag>Standard</harvestTag>
+            <harvestFailable>true</harvestFailable>
+            <harvestedThingDef>MedicineHerbal</harvestedThingDef>
+            <harvestYield>1</harvestYield>
+            <topWindExposure>0.1</topWindExposure>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>1.0</max>
+            </visualSizeRange>
+        </plant>
+    </ThingDef>
+    <!--======================CUSTOM PLANTS=======================-->
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_PinkHydrangea</defName>
+        <label>hydrangea (pink)</label>
+        <description>A unique and beautiful flowering shrub. The color of its flowers is affected by the pH of the soil it's planted in. Hydrangeas turn pink when planted in a more alkaline soil.</description>
+        <statBases>
+            <MaxHitPoints>85</MaxHitPoints>
+            <Beauty>19</Beauty>
+            <Nutrition>0.05</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/PinkHydrangea</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <ingestible />
+        <plant>
+            <dieIfLeafless>true</dieIfLeafless>
+            <harvestTag>Standard</harvestTag>
+            <sowWork>800</sowWork>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Hydrangea</li>
+            </sowResearchPrerequisites>
+            <topWindExposure>0.1</topWindExposure>
+            <growDays>2</growDays>
+            <lifespanDaysPerGrowDays>6</lifespanDaysPerGrowDays>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>1</max>
+            </visualSizeRange>
+            <purpose>Beauty</purpose>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_BlueHydrangea</defName>
+        <label>hydrangea (blue)</label>
+        <description>A unique and beautiful flowering shrub. The color of its flowers is affected by the pH of the soil it's planted in. Hydrangeas turn blue when planted in a more acidic soil.</description>
+        <statBases>
+            <MaxHitPoints>85</MaxHitPoints>
+            <Beauty>19</Beauty>
+            <Nutrition>0.05</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/BlueHydrangea</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <ingestible />
+        <plant>
+            <dieIfLeafless>true</dieIfLeafless>
+            <harvestTag>Standard</harvestTag>
+            <sowWork>800</sowWork>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Hydrangea</li>
+            </sowResearchPrerequisites>
+            <topWindExposure>0.1</topWindExposure>
+            <growDays>2</growDays>
+            <lifespanDaysPerGrowDays>6</lifespanDaysPerGrowDays>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>1</max>
+            </visualSizeRange>
+            <purpose>Beauty</purpose>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_PurpleHydrangea</defName>
+        <label>hydrangea (purple)</label>
+        <description>A unique and beautiful flowering shrub. The color of its flowers is affected by the pH of the soil it's planted in. Hydrangeas turn purple when planted in a soil that's only slightly acidic.</description>
+        <statBases>
+            <MaxHitPoints>85</MaxHitPoints>
+            <Beauty>19</Beauty>
+            <Nutrition>0.05</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/PurpleHydrangea</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <ingestible />
+        <plant>
+            <dieIfLeafless>true</dieIfLeafless>
+            <harvestTag>Standard</harvestTag>
+            <sowWork>800</sowWork>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Hydrangea</li>
+            </sowResearchPrerequisites>
+            <topWindExposure>0.1</topWindExposure>
+            <growDays>2</growDays>
+            <lifespanDaysPerGrowDays>6</lifespanDaysPerGrowDays>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>1</max>
+            </visualSizeRange>
+            <purpose>Beauty</purpose>
+        </plant>
+    </ThingDef>
+    <!--all the vanilla plants have been copied. for harvestable plants their harvest yield has been halved. wild plants and crops grow in half the time.-->
+    <!--======================CROPS=======================-->
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_Rice</defName>
+        <label>rice plant</label>
+        <description>A short, fast-growing crop that yields small edible grains. Its great nutritional ouput and ease of cultivation has made it the economic core of many great civilizations. While rice grows quickly, it is sensitive to soil fertility and will not fare well in poor soil.</description>
+        <statBases>
+            <MaxHitPoints>85</MaxHitPoints>
+            <Nutrition>0.18</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/RicePlant</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/RicePlant</uiIconPath>
+        <ingestible />
+        <plant>
+            <dieIfLeafless>true</dieIfLeafless>
+            <maxMeshCount>1</maxMeshCount>
+            <harvestTag>Standard</harvestTag>
+            <harvestedThingDef>RawRice</harvestedThingDef>
+            <harvestYield>3</harvestYield>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_CropMini</li>
+            </sowResearchPrerequisites>
+            <topWindExposure>0.1</topWindExposure>
+            <growDays>1.5</growDays>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>0.6</max>
+            </visualSizeRange>
+            <purpose>Food</purpose>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_Potato</defName>
+        <label>potato plant</label>
+        <description>A highly nutritious tuber. Potatoes grow well even in somewhat poor soil, and form a delicious crispy outer coating when fried in oil.</description>
+        <statBases>
+            <MaxHitPoints>85</MaxHitPoints>
+            <Nutrition>0.2</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/PotatoPlant</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/PotatoPlant</uiIconPath>
+        <ingestible />
+        <plant>
+            <fertilitySensitivity>0.4</fertilitySensitivity>
+            <dieIfLeafless>true</dieIfLeafless>
+            <harvestTag>Standard</harvestTag>
+            <harvestedThingDef>RawPotatoes</harvestedThingDef>
+            <harvestYield>5</harvestYield>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_CropMini</li>
+            </sowResearchPrerequisites>
+            <topWindExposure>0.1</topWindExposure>
+            <growDays>2.9</growDays>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>1</max>
+            </visualSizeRange>
+            <purpose>Food</purpose>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_Corn</defName>
+        <label>corn plant</label>
+        <description>A tall grain plant which produces ears of soft, edible seeds. While corn takes a long time to grow, it yields lots of food compared to other crops. Harvested corn takes a long time to spoil.</description>
+        <statBases>
+            <MaxHitPoints>150</MaxHitPoints>
+            <Nutrition>0.3</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/CornPlant</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/CornPlant</uiIconPath>
+        <ingestible />
+        <plant>
+            <fertilityMin>0.70</fertilityMin>
+            <dieIfLeafless>true</dieIfLeafless>
+            <harvestTag>Standard</harvestTag>
+            <harvestedThingDef>RawCorn</harvestedThingDef>
+            <harvestYield>11</harvestYield>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_CropMini</li>
+            </sowResearchPrerequisites>
+            <topWindExposure>0.35</topWindExposure>
+            <growDays>5.65</growDays>
+            <immatureGraphicPath>alleZSoyez_AnyPlant/Immature/CornPlant</immatureGraphicPath>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>1.4</max>
+            </visualSizeRange>
+            <purpose>Food</purpose>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_Strawberry</defName>
+        <label>strawberry plant</label>
+        <description>A low bush-like plant that yields fragile but delicious strawberries. While it isn't quite as productive calorie-for-calorie as other crops, strawberries are delicious even when raw.</description>
+        <statBases>
+            <MaxHitPoints>85</MaxHitPoints>
+            <Nutrition>0.2</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>Things/Plant/StrawberryPlant</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+        </graphicData>
+        <ingestible />
+        <plant>
+            <growDays>2.3</growDays>
+            <dieIfLeafless>true</dieIfLeafless>
+            <harvestTag>Standard</harvestTag>
+            <harvestedThingDef>RawBerries</harvestedThingDef>
+            <harvestYield>4</harvestYield>
+            <sowMinSkill>5</sowMinSkill>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_CropMini</li>
+            </sowResearchPrerequisites>
+            <topWindExposure>0.1</topWindExposure>
+            <immatureGraphicPath>Things/Plant/StrawberryPlant_Immature</immatureGraphicPath>
+            <visualSizeRange>
+                <min>0.25</min>
+                <max>1</max>
+            </visualSizeRange>
+            <purpose>Food</purpose>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_Haygrass</defName>
+        <label>haygrass</label>
+        <description>A mixture of nutrient-rich grasses which yield large amounts of hay. Hay is edible for animals, but not humans.</description>
+        <statBases>
+            <MaxHitPoints>85</MaxHitPoints>
+            <Flammability>1.3</Flammability>
+            <Nutrition>0.2</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/Haygrass</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/Haygrass</uiIconPath>
+        <ingestible />
+        <plant>
+            <fertilitySensitivity>0.6</fertilitySensitivity>
+            <growDays>3.5</growDays>
+            <dieIfLeafless>true</dieIfLeafless>
+            <maxMeshCount>1</maxMeshCount>
+            <harvestTag>Standard</harvestTag>
+            <harvestedThingDef>Hay</harvestedThingDef>
+            <harvestYield>9</harvestYield>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_CropMini</li>
+            </sowResearchPrerequisites>
+            <topWindExposure>0.1</topWindExposure>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>0.65</max>
+            </visualSizeRange>
+            <purpose>Food</purpose>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_Cotton</defName>
+        <label>cotton plant</label>
+        <description>A mid-size crop that yields fine white cotton fibers. These are used to make cloth.</description>
+        <statBases>
+            <MaxHitPoints>85</MaxHitPoints>
+            <Nutrition>0.2</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/CottonPlant</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/CottonPlant</uiIconPath>
+        <ingestible />
+        <plant>
+            <growDays>4</growDays>
+            <dieIfLeafless>true</dieIfLeafless>
+            <harvestTag>Standard</harvestTag>
+            <harvestedThingDef>Cloth</harvestedThingDef>
+            <harvestYield>5</harvestYield>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_CropMini</li>
+            </sowResearchPrerequisites>
+            <topWindExposure>0.1</topWindExposure>
+            <immatureGraphicPath>alleZSoyez_AnyPlant/Immature/CottonPlant</immatureGraphicPath>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>1.05</max>
+            </visualSizeRange>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_Devilstrand</defName>
+        <label>devilstrand</label>
+        <description>This fragile mushroom was genetically engineered to produce a silk net that is both difficult to tear and soft to the touch. While the mushroom takes a very long time to grow, only exotic ultra-tech fabrics outperform its devilstrand fibers.\n\nSome say it's called devilstrand because of its red color. Others think it owes its name to the greed it inspires in people.</description>
+        <statBases>
+            <MaxHitPoints>85</MaxHitPoints>
+            <Nutrition>0.15</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/Devilstrand</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/Devilstrand</uiIconPath>
+        <ingestible />
+        <plant>
+            <growDays>11.25</growDays>
+            <sowWork>400</sowWork>
+            <dieIfLeafless>true</dieIfLeafless>
+            <harvestTag>Standard</harvestTag>
+            <harvestedThingDef>DevilstrandCloth</harvestedThingDef>
+            <harvestYield>3</harvestYield>
+            <neverBlightable>false</neverBlightable>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowMinSkill>10</sowMinSkill>
+            <sowResearchPrerequisites>
+                <li>Devilstrand</li>
+                <li>AnyPlant_Research_CropMini</li>
+            </sowResearchPrerequisites>
+            <topWindExposure>0.1</topWindExposure>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>1.0</max>
+            </visualSizeRange>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="HealrootBase">
+        <defName>AnyPlant_Plant_Healroot</defName>
+        <label>healroot</label>
+        <description>A slow-growing plant which yields herbal medicine when harvested. Sowing and harvesting healroot are both very labor-intensive tasks because of its delicate shoots.\n\nHealroot was selectively bred for centuries by settlers. It is sometimes also called &quot;healer's hand&quot; by tribespeople - a nickname it owes to its five major medicinal virtues.</description>
+        <plant>
+            <growDays>3.5</growDays>
+            <sowWork>800</sowWork>
+            <sowMinSkill>8</sowMinSkill>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_CropMini</li>
+            </sowResearchPrerequisites>
+            <purpose>Health</purpose>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_Hops</defName>
+        <label>hop plant</label>
+        <description>A flowering crop that yields hops, an essential ingredient in beer.</description>
+        <statBases>
+            <MaxHitPoints>85</MaxHitPoints>
+            <Nutrition>0.2</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/HopsPlant</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/HopsPlant</uiIconPath>
+        <ingestible />
+        <plant>
+            <fertilitySensitivity>0.7</fertilitySensitivity>
+            <growDays>2.5</growDays>
+            <dieIfLeafless>true</dieIfLeafless>
+            <harvestTag>Standard</harvestTag>
+            <harvestedThingDef>RawHops</harvestedThingDef>
+            <harvestYield>4</harvestYield>
+            <sowMinSkill>3</sowMinSkill>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_CropMini</li>
+            </sowResearchPrerequisites>
+            <topWindExposure>0.1</topWindExposure>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>0.8</max>
+            </visualSizeRange>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_Smokeleaf</defName>
+        <label>smokeleaf plant</label>
+        <description>A leafy crop grown for the psychological effects of chemicals in its leaves. Smokeleaf leaves can be prepared into joints at the crafting spot. Smokeleaf makes a user feel relaxed, but reduces motivation, and can be addictive.</description>
+        <statBases>
+            <MaxHitPoints>85</MaxHitPoints>
+            <Nutrition>0.15</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>Things/Plant/SmokeleafPlant</texPath>
+        </graphicData>
+        <ingestible />
+        <plant>
+            <growDays>3.75</growDays>
+            <dieIfLeafless>true</dieIfLeafless>
+            <harvestTag>Standard</harvestTag>
+            <harvestedThingDef>SmokeleafLeaves</harvestedThingDef>
+            <harvestYield>4</harvestYield>
+            <sowMinSkill>4</sowMinSkill>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_CropMini</li>
+            </sowResearchPrerequisites>
+            <topWindExposure>0.1</topWindExposure>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>1.1</max>
+            </visualSizeRange>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_Psychoid</defName>
+        <label>psychoid plant</label>
+        <description>A leafy plant which generates the chemical compound psychite. Originally evolved as a defense mechanism to ward off plant-eating animals by overstimulating and sickening them, the psychite drug can be extracted and refined into various forms for recreational use. It is addictive.</description>
+        <statBases>
+            <MaxHitPoints>85</MaxHitPoints>
+            <Nutrition>0.15</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/PsychoidPlant</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/PsychoidPlant</uiIconPath>
+        <ingestible />
+        <plant>
+            <growDays>4.5</growDays>
+            <dieIfLeafless>true</dieIfLeafless>
+            <harvestTag>Standard</harvestTag>
+            <harvestedThingDef>PsychoidLeaves</harvestedThingDef>
+            <harvestYield>8</harvestYield>
+            <sowMinSkill>3</sowMinSkill>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_CropMini</li>
+            </sowResearchPrerequisites>
+            <topWindExposure>0.1</topWindExposure>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>1.2</max>
+            </visualSizeRange>
+        </plant>
+    </ThingDef>
+    <!--======================COMMON PLANTS=======================-->
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_Grass</defName>
+        <label>grass</label>
+        <description>Wild grass. Grows anywhere there is a little light and minimally fertile ground.</description>
+        <statBases>
+            <MaxHitPoints>85</MaxHitPoints>
+            <Flammability>1.3</Flammability>
+            <Nutrition>0.15</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>Things/Plant/Grass</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+        </graphicData>
+        <ingestible />
+        <plant>
+            <fertilityMin>0.05</fertilityMin>
+            <fertilitySensitivity>0.3</fertilitySensitivity>
+            <growDays>1.25</growDays>
+            <leaflessGraphicPath>Things/Plant/Grass_Leafless</leaflessGraphicPath>
+            <harvestWork>40</harvestWork>
+            <maxMeshCount>1</maxMeshCount>
+            <visualSizeRange>
+                <min>0.4</min>
+                <max>0.6</max>
+            </visualSizeRange>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_General</li>
+            </sowResearchPrerequisites>
+            <topWindExposure>0.4</topWindExposure>
+        </plant>
+    </ThingDef>
+    <!--
+    do we really need tall grass too?
+    <ThingDef ParentName="AnyPlant_PlantBase"><defName>AnyPlant_Plant_TallGrass</defName><label>tall grass</label><description>Wild tall grass. Slows down anyone moving over it.</description><statBases><MaxHitPoints>90</MaxHitPoints><Flammability>1.3</Flammability><Nutrition>0.16</Nutrition></statBases><graphicData><texPath>Things/Plant/Grass</texPath><graphicClass>Graphic_Random</graphicClass></graphicData><ingestible /><plant><fertilitySensitivity>0.7</fertilitySensitivity><growDays>1.5</growDays><harvestWork>60</harvestWork><maxMeshCount>1</maxMeshCount><visualSizeRange><min>0.7</min><max>0.85</max></visualSizeRange><sowTags><li>alleZSoyez_AnyPlant</li></sowTags><sowResearchPrerequisites><li>AnyPlant_Research_General</li></sowResearchPrerequisites><topWindExposure>0.4</topWindExposure></plant></ThingDef>-->
+    <!--replace the default rose so it can only be grown in the ground-->
+    <ThingDef ParentName="PlantBase">
+        <defName>Plant_Rose</defName>
+        <label>rose</label>
+        <description>A beautiful cultivated flower, the rose has been a symbol of love since Earth's ancient era.</description>
+        <statBases>
+            <MaxHitPoints>85</MaxHitPoints>
+            <Beauty>14</Beauty>
+            <Nutrition>0.05</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>Things/Plant/Rose</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+        </graphicData>
+        <altitudeLayer>Item</altitudeLayer>
+        <selectable>true</selectable>
+        <ingestible />
+        <plant>
+            <dieIfLeafless>true</dieIfLeafless>
+            <harvestTag>Standard</harvestTag>
+            <sowWork>800</sowWork>
+            <sowTags>
+                <li>Ground</li>
+            </sowTags>
+            <growMinGlow>0.3</growMinGlow>
+            <topWindExposure>0.1</topWindExposure>
+            <growDays>1.5</growDays>
+            <lifespanDaysPerGrowDays>5</lifespanDaysPerGrowDays>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>1.05</max>
+            </visualSizeRange>
+            <wildOrder>1</wildOrder>
+            <purpose>Beauty</purpose>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_Rose</defName>
+        <label>rose</label>
+        <description>A beautiful cultivated flower, the rose has been a symbol of love since Earth's ancient era.</description>
+        <statBases>
+            <MaxHitPoints>85</MaxHitPoints>
+            <Beauty>14</Beauty>
+            <Nutrition>0.05</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/Rose</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/Rose</uiIconPath>
+        <altitudeLayer>Item</altitudeLayer>
+        <selectable>true</selectable>
+        <ingestible />
+        <plant>
+            <dieIfLeafless>true</dieIfLeafless>
+            <harvestTag>Standard</harvestTag>
+            <sowWork>800</sowWork>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+                <li>Decorative</li>
+            </sowTags>
+            <growMinGlow>0.3</growMinGlow>
+            <topWindExposure>0.1</topWindExposure>
+            <growDays>1.5</growDays>
+            <lifespanDaysPerGrowDays>5</lifespanDaysPerGrowDays>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>1</max>
+            </visualSizeRange>
+            <wildOrder>1</wildOrder>
+            <purpose>Beauty</purpose>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_Daylily</defName>
+        <label>daylily</label>
+        <description>A cultivated flower with wide petals and a short lifespan. Daylilies are very beautiful, but must be replanted often.</description>
+        <statBases>
+            <MaxHitPoints>85</MaxHitPoints>
+            <Beauty>18</Beauty>
+            <Nutrition>0.05</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>Things/Plant/Daylily</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+        </graphicData>
+        <altitudeLayer>Item</altitudeLayer>
+        <selectable>true</selectable>
+        <ingestible />
+        <plant>
+            <dieIfLeafless>true</dieIfLeafless>
+            <harvestTag>Standard</harvestTag>
+            <sowWork>800</sowWork>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <growMinGlow>0.3</growMinGlow>
+            <topWindExposure>0.1</topWindExposure>
+            <growDays>1.5</growDays>
+            <lifespanDaysPerGrowDays>3</lifespanDaysPerGrowDays>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>1</max>
+            </visualSizeRange>
+            <wildOrder>1</wildOrder>
+            <purpose>Beauty</purpose>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_BushBase">
+        <defName>AnyPlant_Plant_Bush</defName>
+        <label>bush</label>
+        <description>A short shrub. Does not typically talk.</description>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/Bush</texPath>
+            <shadowData>
+                <volume>(0.55, 0.2, 0.2)</volume>
+            </shadowData>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/Bush</uiIconPath>
+        <plant>
+            <growDays>1.5</growDays>
+            <leaflessGraphicPath>alleZSoyez_AnyPlant/Leafless/Bush</leaflessGraphicPath>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>1</max>
+            </visualSizeRange>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_General</li>
+            </sowResearchPrerequisites>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_Brambles</defName>
+        <label>brambles</label>
+        <description>Tangled, thorny, woody shoots covered with leaves. Brambles grow in clusters, and slow down anyone moving over them.</description>
+        <statBases>
+            <MaxHitPoints>100</MaxHitPoints>
+            <Nutrition>0.2</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>Things/Plant/Brambles</texPath>
+            <drawSize>1</drawSize>
+            <graphicClass>Graphic_Random</graphicClass>
+        </graphicData>
+        <ingestible />
+        <plant>
+            <fertilitySensitivity>0.7</fertilitySensitivity>
+            <growDays>1.5</growDays>
+            <harvestWork>60</harvestWork>
+            <maxMeshCount>1</maxMeshCount>
+            <leaflessGraphicPath>Things/Plant/Brambles_Leafless</leaflessGraphicPath>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>0.7</max>
+            </visualSizeRange>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_General</li>
+            </sowResearchPrerequisites>
+            <topWindExposure>0.15</topWindExposure>
+        </plant>
+    </ThingDef>
+    <!--======================TEMPERATE=======================-->
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_Dandelion</defName>
+        <label>dandelions</label>
+        <description>A tiny yellow flower which grows in large clusters. Though it is often considered a weed, dandelions in bloom are quite beautiful.</description>
+        <statBases>
+            <MaxHitPoints>85</MaxHitPoints>
+            <Beauty>4</Beauty>
+            <Nutrition>0.18</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/Dandelion</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <ingestible />
+        <plant>
+            <fertilitySensitivity>0.0</fertilitySensitivity>
+            <growDays>1.25</growDays>
+            <fertilityMin>0.05</fertilityMin>
+            <maxMeshCount>1</maxMeshCount>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>1</max>
+            </visualSizeRange>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Temperate</li>
+            </sowResearchPrerequisites>
+            <topWindExposure>0.3</topWindExposure>
+            <purpose>Beauty</purpose>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_Astragalus</defName>
+        <label>astragalus</label>
+        <description>A small perennial wildflower that grows in alpine climates.</description>
+        <statBases>
+            <MaxHitPoints>85</MaxHitPoints>
+            <Beauty>4</Beauty>
+            <Nutrition>0.18</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/Astragalus</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/Astragalus</uiIconPath>
+        <ingestible />
+        <plant>
+            <fertilityMin>0.05</fertilityMin>
+            <fertilitySensitivity>0</fertilitySensitivity>
+            <growDays>1.25</growDays>
+            <maxMeshCount>1</maxMeshCount>
+            <visualSizeRange>
+                <min>0.6</min>
+                <max>0.9</max>
+            </visualSizeRange>
+            <!--<immatureGraphicPath>alleZSoyez_AnyPlant/Immature/Astragalus</immatureGraphicPath>-->
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Temperate</li>
+            </sowResearchPrerequisites>
+            <topWindExposure>0.3</topWindExposure>
+            <purpose>Beauty</purpose>            
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_Moss</defName>
+        <label>moss</label>
+        <description>Wild moss that grows in clumps in areas of low light and cool temperatures. Moss takes a long time to grow, but is very frost-resistant.</description>
+        <statBases>
+            <MaxHitPoints>120</MaxHitPoints>
+            <Flammability>0.6</Flammability>
+            <Nutrition>0.15</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>Things/Plant/Moss</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+        </graphicData>
+        <ingestible />
+        <plant>
+            <fertilityMin>0.05</fertilityMin>
+            <fertilitySensitivity>0</fertilitySensitivity>
+            <growDays>7.5</growDays>
+            <leaflessGraphicPath>Things/Plant/Moss_Leafless</leaflessGraphicPath>
+            <harvestWork>60</harvestWork>
+            <maxMeshCount>1</maxMeshCount>
+            <visualSizeRange>
+                <min>0.4</min>
+                <max>0.6</max>
+            </visualSizeRange>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Temperate</li>
+            </sowResearchPrerequisites>
+            <topWindExposure>0.0</topWindExposure>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_Berry</defName>
+        <label>berry bush</label>
+        <description>A bushy wild plant which yields delicious berries. Berries can be cooked, but they're also good to eat even when raw.</description>
+        <statBases>
+            <MaxHitPoints>120</MaxHitPoints>
+            <Nutrition>0.35</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/BerryPlant</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+            <shadowData>
+                <volume>(0.55, 0.2, 0.2)</volume>
+                <offset>(0,0,-0.25)</offset>
+            </shadowData>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/BerryPlant</uiIconPath>
+        <fillPercent>0.20</fillPercent>
+        <plant>
+            <fertilityMin>0.5</fertilityMin>
+            <fertilitySensitivity>0.5</fertilitySensitivity>
+            <growDays>3</growDays>
+            <leaflessGraphicPath>alleZSoyez_AnyPlant/Leafless/BerryPlant</leaflessGraphicPath>
+            <immatureGraphicPath>alleZSoyez_AnyPlant/Immature/BerryPlant</immatureGraphicPath>
+            <harvestYield>10</harvestYield>
+            <harvestWork>250</harvestWork>
+            <harvestTag>Standard</harvestTag>
+            <harvestAfterGrowth>0.30</harvestAfterGrowth>
+            <harvestedThingDef>RawBerries</harvestedThingDef>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>1.2</max>
+            </visualSizeRange>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowMinSkill>5</sowMinSkill>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Temperate</li>
+            </sowResearchPrerequisites>
+            <topWindExposure>0.3</topWindExposure>
+            <purpose>Food</purpose>
+        </plant>
+    </ThingDef>
+    <!--======================ARID=======================-->
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_Agave</defName>
+        <label>agave</label>
+        <description>A large-leafed desert plant with edible flowers and stalks.</description>
+        <statBases>
+            <MaxHitPoints>120</MaxHitPoints>
+            <Nutrition>0.2</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/Agave</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+            <shadowData>
+                <volume>(0.2, 0.6, 0.2)</volume>
+            </shadowData>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/Agave</uiIconPath>
+        <fillPercent>0.20</fillPercent>
+        <ingestible />
+        <plant>
+            <fertilitySensitivity>0.5</fertilitySensitivity>
+            <growDays>3</growDays>
+            <harvestTag>Standard</harvestTag>
+            <harvestAfterGrowth>0.30</harvestAfterGrowth>
+            <harvestedThingDef>RawAgave</harvestedThingDef>
+            <harvestYield>5</harvestYield>
+            <harvestWork>300</harvestWork>
+            <visualSizeRange>
+                <min>0.4</min>
+                <max>1.2</max>
+            </visualSizeRange>
+            <topWindExposure>0.3</topWindExposure>
+            <purpose>Food</purpose>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Arid</li>
+            </sowResearchPrerequisites>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_PincushionCactus</defName>
+        <label>pincushion cactus</label>
+        <description>A short cactus. It is so named because it resembles a pincushion.</description>
+        <statBases>
+            <MaxHitPoints>150</MaxHitPoints>
+            <Nutrition>0.25</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/PincushionCactus</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/PincushionCactus</uiIconPath>
+        <ingestible />
+        <plant>
+            <fertilityMin>0.05</fertilityMin>
+            <fertilitySensitivity>0</fertilitySensitivity>
+            <growDays>1.25</growDays>
+            <visualSizeRange>
+                <min>0.4</min>
+                <max>0.8</max>
+            </visualSizeRange>
+            <topWindExposure>0.0</topWindExposure>
+            <maxMeshCount>1</maxMeshCount>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Arid</li>
+            </sowResearchPrerequisites>
+        </plant>
+    </ThingDef>
+    <!--======================TROPICAL=======================-->
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>Plant_ShrubLow</defName>
+        <label>low shrubs</label>
+        <description>Various low broadleaf shrubs. These grow in clusters and slow down movement.</description>
+        <statBases>
+            <MaxHitPoints>90</MaxHitPoints>
+            <Nutrition>0.2</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>Things/Plant/ShrubLow</texPath>
+        </graphicData>
+        <ingestible />
+        <plant>
+            <fertilitySensitivity>0.7</fertilitySensitivity>
+            <growDays>1.5</growDays>
+            <harvestWork>60</harvestWork>
+            <maxMeshCount>1</maxMeshCount>
+            <visualSizeRange>
+                <min>0.6</min>
+                <max>1.3</max>
+            </visualSizeRange>
+            <topWindExposure>0.2</topWindExposure>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Tropical</li>
+            </sowResearchPrerequisites>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_BushBase">
+        <defName>Plant_Alocasia</defName>
+        <label>alocasia</label>
+        <description>A tropical plant. Its extremely broad leaves are a commonly-recognized signifier of tropical forests.</description>
+        <graphicData>
+            <texPath>Things/Plant/Alocasia</texPath>
+            <shadowData>
+                <volume>(0.55, 0.17, 0.15)</volume>
+                <offset>(0,0,-0.2)</offset>
+            </shadowData>
+        </graphicData>
+        <plant>
+            <leaflessGraphicPath>Things/Plant/Alocasia_Leafless</leaflessGraphicPath>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Tropical</li>
+            </sowResearchPrerequisites>
+            <visualSizeRange>
+                <min>0.6</min>
+                <max>1.3</max>
+            </visualSizeRange>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_BushBase">
+        <defName>Plant_Clivia</defName>
+        <label>clivia</label>
+        <description>An unusual plant with tall, pretty flowers. Some call it the 'bush lily'.</description>
+        <statBases>
+            <Beauty>2</Beauty>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/Clivia</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+            <shadowData>
+                <volume>(0.3, 0.2, 0.15)</volume>
+                <offset>(0,0,-0.1)</offset>
+            </shadowData>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/Clivia</uiIconPath>
+        <plant>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Tropical</li>
+            </sowResearchPrerequisites>
+            <visualSizeRange>
+                <min>0.6</min>
+                <max>1.1</max>
+            </visualSizeRange>
+            <purpose>Beauty</purpose>            
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_BushBase">
+        <defName>Plant_Rafflesia</defName>
+        <label>giant rafflesia</label>
+        <description>A rare, giant flower which can be found deep in steaming jungles. You would think a giant flower would be beautiful, but this one looks and smells like rotting flesh.</description>
+        <statBases>
+            <Beauty>-6</Beauty>
+        </statBases>
+        <graphicData>
+            <texPath>Things/Plant/Rafflesia</texPath>
+            <drawSize>1</drawSize>
+            <shadowData>
+                <volume>(0.55, 0.2, 0.2)</volume>
+                <offset>(0,0,-0.1)</offset>
+            </shadowData>
+        </graphicData>
+        <plant>
+            <topWindExposure>0.07</topWindExposure>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Tropical</li>
+            </sowResearchPrerequisites>
+        </plant>
+    </ThingDef>
+    <!--======================SWAMP=======================-->
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_Chokevine</defName>
+        <label>chokevine</label>
+        <description>Tangled masses of cord-like, spiky vines which coil in great masses along the ground. Chokevine greatky slows down anyone who moves over it. Multiple tribes have independently generated stories of chokevine strangling children to death in the night, as a way to scare kids into coming home before dark.</description>
+        <statBases>
+            <MaxHitPoints>100</MaxHitPoints>
+            <Nutrition>0.25</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/Chokevine</texPath>
+            <drawSize>2.25</drawSize>
+            <graphicClass>Graphic_Random</graphicClass>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/Chokevine</uiIconPath>
+        <ingestible />
+        <plant>
+            <fertilitySensitivity>0.7</fertilitySensitivity>
+            <growDays>2.5</growDays>
+            <harvestWork>150</harvestWork>
+            <maxMeshCount>1</maxMeshCount>
+            <leaflessGraphicPath>alleZSoyez_AnyPlant/Leafless/Chokevine</leaflessGraphicPath>
+            <visualSizeRange>
+                <min>0.1</min>
+                <max>0.4</max>
+            </visualSizeRange>
+            <topWindExposure>0.16</topWindExposure>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Swamp</li>
+            </sowResearchPrerequisites>
+        </plant>
+    </ThingDef>
+    <!--======================CAVE=======================-->
+    <ThingDef ParentName="AnyPlant_CavePlantBase">
+        <defName>AnyPlant_Glowstool</defName>
+        <label>glowstool</label>
+        <description>A small brown mushroom typically found in caves. It smells like an old, dirty rag pulled from the stomach of a rotting muffalo - but it tastes surprisingly good when cooked. Dies when exposed to light.</description>
+        <statBases>
+            <MaxHitPoints>100</MaxHitPoints>
+            <Beauty>2</Beauty>
+            <Nutrition>0.35</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/Glowstool</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/Glowstool</uiIconPath>
+        <ingestible />
+        <plant>
+            <fertilityMin>0.01</fertilityMin>
+            <fertilitySensitivity>0.15</fertilitySensitivity>
+            <growDays>20</growDays>
+            <dieIfLeafless>true</dieIfLeafless>
+            <harvestYield>10</harvestYield>
+            <harvestTag>Standard</harvestTag>
+            <harvestedThingDef>RawFungus</harvestedThingDef>
+            <maxMeshCount>1</maxMeshCount>
+            <neverBlightable>false</neverBlightable>
+            <visualSizeRange>
+                <min>0.4</min>
+                <max>0.7</max>
+            </visualSizeRange>
+            <topWindExposure>0.05</topWindExposure>
+            <immatureGraphicPath>alleZSoyez_AnyPlant/Immature/Glowstool</immatureGraphicPath>
+            <purpose>Food</purpose>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Cave</li>
+            </sowResearchPrerequisites>
+        </plant>
+        <comps>
+            <li Class="CompProperties_Glower">
+                <glowRadius>10</glowRadius>
+                <glowColor>(5,25,32,0)</glowColor>
+            </li>
+        </comps>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_CavePlantBase">
+        <defName>AnyPlant_Agarilux</defName>
+        <label>agarilux</label>
+        <description>An enormous purple mushroom. Its size and glowing protrusions make this fungus beautiful to look at. It dies when exposed to light.</description>
+        <statBases>
+            <MaxHitPoints>150</MaxHitPoints>
+            <Beauty>4</Beauty>
+            <Nutrition>0.5</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/Agarilux</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+            <shadowData>
+                <volume>(0.2, 0.3, 0.13)</volume>
+                <offset>(-0.03,0,-0.44)</offset>
+            </shadowData>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/Agarilux</uiIconPath>
+        <ingestible />
+        <plant>
+            <fertilityMin>0.01</fertilityMin>
+            <fertilitySensitivity>0.15</fertilitySensitivity>
+            <growDays>30</growDays>
+            <dieIfLeafless>true</dieIfLeafless>
+            <harvestYield>18</harvestYield>
+            <harvestTag>Standard</harvestTag>
+            <harvestedThingDef>RawFungus</harvestedThingDef>
+            <neverBlightable>false</neverBlightable>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>1</max>
+            </visualSizeRange>
+            <topWindExposure>0.1</topWindExposure>
+            <purpose>Food</purpose>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Cave</li>
+            </sowResearchPrerequisites>
+        </plant>
+        <comps>
+            <li Class="CompProperties_Glower">
+                <glowRadius>10</glowRadius>
+                <glowColor>(23,15,30,0)</glowColor>
+            </li>
+        </comps>
+    </ThingDef>
+    <!-- do YOU want to redraw this? I sure don't...
+    <ThingDef ParentName="AnyPlant_CavePlantBase"><defName>AnyPlant_Bryolux</defName><label>bryolux</label><description>A blue moss typically found in deep, dark caves. It is sticky, with tangled fibers, which slows anyone walking over it. Dies when exposed to light.</description><statBases><MaxHitPoints>100</MaxHitPoints><Beauty>1</Beauty><Nutrition>0.15</Nutrition></statBases><graphicData><texPath>Things/Plant/Bryolux</texPath><graphicClass>Graphic_Random</graphicClass></graphicData><ingestible /><plant><fertilityMin>0.01</fertilityMin><fertilitySensitivity>0.15</fertilitySensitivity><growDays>30</growDays><dieIfLeafless>true</dieIfLeafless><maxMeshCount>1</maxMeshCount><neverBlightable>false</neverBlightable><visualSizeRange><min>0.82</min><max>0.95</max></visualSizeRange><topWindExposure>0.02</topWindExposure><sowTags><li>alleZSoyez_AnyPlant</li></sowTags><sowResearchPrerequisites><li>AnyPlant_Research_Cave</li></sowResearchPrerequisites></plant><comps><li Class="CompProperties_Glower"><glowRadius>10</glowRadius><glowColor>(5,5,25,0)</glowColor></li></comps></ThingDef>-->
+    <!--======================COCOA TREE=======================-->
+    <ThingDef ParentName="AnyPlant_TreeBase">
+        <defName>AnyPlant_Plant_TreeCocoa</defName>
+        <label>bonsai cocoa tree</label>
+        <description>A tropical tree that produces chocolate, genetically engineered to sweeten its own product, and survive in slightly less-warm climates.</description>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/TreeCocoa</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+            <shadowData>
+                <volume>(0.15, 0.3, 0.15)</volume>
+                <offset>(0,0,-0.38)</offset>
+            </shadowData>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/TreeCocoa</uiIconPath>        
+        <statBases>
+            <Beauty>2</Beauty>
+            <Nutrition>1.25</Nutrition>
+        </statBases>
+        <ingestible />
+        <plant>
+            <dieIfLeafless>true</dieIfLeafless>
+            <growDays>8</growDays>
+            <visualSizeRange>
+                <min>0.3</min>
+                <max>1.0</max>
+            </visualSizeRange>
+            <sowMinSkill>8</sowMinSkill>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>Cocoa</li>
+                <li>AnyPlant_Research_Bonsai</li>
+            </sowResearchPrerequisites>
+            <topWindExposure>0.15</topWindExposure>
+            <immatureGraphicPath>alleZSoyez_AnyPlant/Immature/TreeCocoa</immatureGraphicPath>
+            <harvestWork>400</harvestWork>
+            <harvestTag>Standard</harvestTag>
+            <harvestYield>10</harvestYield>
+            <harvestedThingDef>Chocolate</harvestedThingDef>
+            <harvestFailable>true</harvestFailable>
+        </plant>
+    </ThingDef>
+    <!--======================TEMPERATE TREES=======================-->
+    <ThingDef ParentName="AnyPlant_DeciduousTreeBase">
+        <defName>AnyPlant_Plant_TreeOak</defName>
+        <label>bonsai oak tree</label>
+        <description>A hardwood tree. Oaks take a long time to grow, but their wood is so strong that 'oak' is used as a metaphor for strength across many cultures.</description>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/TreeOak</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+            <shadowData>
+                <volume>(0.2, 0.35, 0.13)</volume>
+                <offset>(-0.03,0,-0.44)</offset>
+            </shadowData>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/TreeOak</uiIconPath>  
+        <statBases>
+            <Beauty>2</Beauty>
+        </statBases>
+        <plant>
+            <growDays>15</growDays>
+            <leaflessGraphicPath>alleZSoyez_AnyPlant/Leafless/TreeOak</leaflessGraphicPath>
+            <harvestWork>1000</harvestWork>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Temperate</li>
+                <li>AnyPlant_Research_Bonsai</li>
+            </sowResearchPrerequisites>
+            <purpose>Beauty</purpose>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_DeciduousTreeBase">
+        <defName>AnyPlant_Plant_TreePoplar</defName>
+        <label>bonsai poplar tree</label>
+        <description>A softwood tree that grows very fast. Unfortunately, its wood is weak and so it yields less useful material than hardwood trees.</description>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/TreePoplar</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+        </graphicData>
+		<uiIconPath>alleZSoyez_AnyPlant/UI/TreePoplar</uiIconPath>
+        <statBases>
+            <Beauty>1</Beauty>
+            <Nutrition>1</Nutrition>
+        </statBases>
+        <ingestible />
+        <plant>
+            <growDays>7.025</growDays>
+            <leaflessGraphicPath>alleZSoyez_AnyPlant/Leafless/TreePoplar</leaflessGraphicPath>
+            <harvestWork>650</harvestWork>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Temperate</li>
+                <li>AnyPlant_Research_Bonsai</li>
+            </sowResearchPrerequisites>
+			<purpose>Beauty</purpose>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_TreeBase">
+        <defName>AnyPlant_Plant_TreePine</defName>
+        <label>bonsai pine tree</label>
+        <description>A large conifer covered with prickly pine cones. It grows in a distinctive conical shape.</description>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/TreePine</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+            <shadowData>
+                <volume>(0.15, 0.3, 0.15)</volume>
+                <offset>(0,0,-0.38)</offset>
+            </shadowData>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/TreePine</uiIconPath>
+        <statBases>
+            <Beauty>2</Beauty>
+            <Nutrition>1.25</Nutrition>
+        </statBases>
+        <ingestible />
+        <plant>
+            <growDays>10</growDays>
+            <visualSizeRange>
+                <min>0.5</min>
+                <max>1.2</max>
+            </visualSizeRange>
+            <harvestWork>700</harvestWork>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Temperate</li>
+                <li>AnyPlant_Research_Bonsai</li>
+            </sowResearchPrerequisites>
+            <purpose>Beauty</purpose>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_DeciduousTreeBase">
+        <defName>AnyPlant_Plant_TreeBirch</defName>
+        <label>bonsai birch tree</label>
+        <description>A temperate-biome tree known for its thin, white, paper-like bark.</description>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/TreeBirch</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+            <shadowData>
+                <volume>(0.15, 0.3, 0.1)</volume>
+                <offset>(-0.03,0,-0.44)</offset>
+            </shadowData>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/TreeBirch</uiIconPath>         
+        <statBases>
+            <Beauty>2</Beauty>
+            <Nutrition>1.25</Nutrition>
+        </statBases>
+        <ingestible />
+        <plant>
+            <growDays>10</growDays>
+            <harvestWork>700</harvestWork>
+            <purpose>Beauty</purpose>
+            <leaflessGraphicPath>alleZSoyez_AnyPlant/Leafless/TreeBirch</leaflessGraphicPath>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Temperate</li>
+                <li>AnyPlant_Research_Bonsai</li>
+            </sowResearchPrerequisites>
+        </plant>
+    </ThingDef>
+    <!--======================ARID TREES=======================-->
+    <ThingDef ParentName="AnyPlant_TreeBase">
+        <defName>AnyPlant_Plant_SaguaroCactus</defName>
+        <label>saguaro cactus</label>
+        <description>A large cactus native to arid Earth environments. Though it is not a tree, it yields a small amount of fibrous material that can be used like wood.</description>
+        <statBases>
+            <MaxHitPoints>130</MaxHitPoints>
+            <Nutrition>1.5</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/SaguaroCactus</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+            <shadowData>
+                <volume>(0.24, 0.3, 0.15)</volume>
+                <offset>(0,0,-0.38)</offset>
+            </shadowData>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/SaguaroCactus</uiIconPath>       
+        <fillPercent>0.35</fillPercent>
+        <plant>
+            <lifespanDaysPerGrowDays>40</lifespanDaysPerGrowDays>
+            <fertilityMin>0.05</fertilityMin>
+            <fertilitySensitivity>0</fertilitySensitivity>
+            <growDays>2.5</growDays>
+            <leaflessGraphicPath>alleZSoyez_AnyPlant/Leafless/SaguaroCactus</leaflessGraphicPath>
+            <harvestWork>300</harvestWork>
+            <purpose>Beauty</purpose>
+            <topWindExposure>0.08</topWindExposure>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Arid</li>
+                <li>AnyPlant_Research_Bonsai</li>
+            </sowResearchPrerequisites>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_TreeBase">
+        <defName>AnyPlant_Plant_TreeDrago</defName>
+        <label>bonsai drago tree</label>
+        <description>A hardy desert tree topped with thick, pointed leaves.</description>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/TreeDrago</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+            <shadowData>
+                <volume>(0.24, 0.35, 0.13)</volume>
+                <offset>(0,0,-0.38)</offset>
+            </shadowData>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/TreeDrago</uiIconPath>
+        <statBases>
+            <Beauty>1</Beauty>
+            <Nutrition>1</Nutrition>
+        </statBases>
+        <ingestible />
+        <plant>
+            <growDays>7</growDays>
+            <harvestWork>650</harvestWork>
+            <purpose>Beauty</purpose>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Arid</li>
+                <li>AnyPlant_Research_Bonsai</li>
+            </sowResearchPrerequisites>
+        </plant>
+    </ThingDef>
+    <!--======================TROPICAL TREES=======================-->
+    <ThingDef ParentName="AnyPlant_DeciduousTreeBase">
+        <defName>AnyPlant_Plant_TreeTeak</defName>
+        <label>bonsai teak tree</label>
+        <description>An exceptionally strong hardwood tree that grows in warm climates. Because teak wood is so durable and water-resistant, it was used to form the keel of wooden sailing ships in ancient times.</description>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/TreeTeak</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/TreeTeak</uiIconPath>
+        <statBases>
+            <Beauty>2</Beauty>
+        </statBases>
+        <plant>
+            <growDays>16.25</growDays>
+            <leaflessGraphicPath>alleZSoyez_AnyPlant/Leafless/TreeOak</leaflessGraphicPath>
+            <harvestWork>1200</harvestWork>
+            <purpose>Beauty</purpose>
+            <visualSizeRange>
+                <min>0.5</min>
+                <max>1</max>
+            </visualSizeRange>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Tropical</li>
+                <li>AnyPlant_Research_Bonsai</li>
+            </sowResearchPrerequisites>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_TreeBase">
+        <defName>AnyPlant_Plant_TreeCecropia</defName>
+        <label>bonsai cecropia tree</label>
+        <description>One of the most common rainforest trees. Cecropia grows very fast, but yields little usable wood.</description>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/TreeCecropia</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+            <shadowData>
+                <volume>(0.18, 0.3, 0.15)</volume>
+            </shadowData>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/TreeCecropia</uiIconPath>         
+        <statBases>
+            <Beauty>1</Beauty>
+            <Nutrition>1.2</Nutrition>
+        </statBases>
+        <plant>
+            <growDays>7</growDays>
+            <harvestWork>550</harvestWork>
+            <purpose>Beauty</purpose>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Tropical</li>
+                <li>AnyPlant_Research_Bonsai</li>
+            </sowResearchPrerequisites>
+        </plant>
+        <ingestible />
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_TreeBase">
+        <defName>AnyPlant_Plant_TreePalm</defName>
+        <label>bonsai palm tree</label>
+        <description>A tropical tree with a tall, naked trunk topped by a cluster of very broad leaves. Unfortunately, this variety doesn't produce any edible coconuts.</description>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/TreePalm</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+            <shadowData>
+                <volume>(0.18, 0.3, 0.15)</volume>
+                <offset>(0.03,0,-0.44)</offset>
+            </shadowData>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/TreePalm</uiIconPath>
+        <statBases>
+            <Beauty>1</Beauty>
+            <Nutrition>1.2</Nutrition>
+        </statBases>
+        <plant>
+            <growDays>7</growDays>
+            <harvestWork>550</harvestWork>
+            <purpose>Beauty</purpose>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Tropical</li>
+                <li>AnyPlant_Research_Bonsai</li>
+            </sowResearchPrerequisites>
+        </plant>
+        <ingestible />
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_TreeBase">
+        <defName>AnyPlant_Plant_TreeBamboo</defName>
+        <label>bonsai bamboo tree</label>
+        <description>A fast-growing tree-like plant that grows in dense groves. Bamboo can be harvested for a wood-like material. The plant itself is not beautiful.</description>
+        <statBases>
+            <Nutrition>1.2</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/TreeBamboo</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+            <shadowData>
+                <volume>(0.38, 0.3, 0.15)</volume>
+                <offset>(0,0,-0.47)</offset>
+            </shadowData>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/TreeBamboo</uiIconPath>
+        <plant>
+            <growDays>6</growDays>
+            <harvestWork>500</harvestWork>
+            <purpose>Beauty</purpose>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Tropical</li>
+                <li>AnyPlant_Research_Bonsai</li>
+            </sowResearchPrerequisites>
+        </plant>
+        <ingestible />
+    </ThingDef>
+    <!--======================SWAMP TREES=======================-->
+    <ThingDef ParentName="AnyPlant_DeciduousTreeBase">
+        <defName>AnyPlant_Plant_TreeWillow</defName>
+        <label>bonsai willow tree</label>
+        <description>One of the fastest growing shade trees, willows provide a beautiful, leafy canopy. It doesn't yield much usable wood.</description>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/TreeWillow</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+            <shadowData>
+                <volume>(0.2, 0.3, 0.13)</volume>
+                <offset>(0,0,-0.44)</offset>
+            </shadowData>
+            <shaderParameters>
+                <_FallColorSource>(0.373, 0.427, 0.313)</_FallColorSource>
+                <_FallTransitionRange>(0.02, 0.14)</_FallTransitionRange>
+            </shaderParameters>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/TreeWillow</uiIconPath>
+        <statBases>
+            <Beauty>2</Beauty>
+        </statBases>
+        <plant>
+            <growDays>6.5</growDays>
+            <leaflessGraphicPath>alleZSoyez_AnyPlant/Leafless/TreeWillow</leaflessGraphicPath>
+            <harvestWork>800</harvestWork>
+            <purpose>Beauty</purpose>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Bonsai</li>
+                <li>AnyPlant_Research_Swamp</li>
+            </sowResearchPrerequisites>
+            <visualSizeRange>
+                <min>0.4</min>
+                <max>1</max>
+            </visualSizeRange>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_DeciduousTreeBase">
+        <defName>AnyPlant_Plant_TreeCypress</defName>
+        <label>bonsai cypress tree</label>
+        <description>A tall coniferous tree often found in swamps. Despite its slow growth, planting these trees can be profitable as a low-effort, long-term investment because they yield so much usable wood.</description>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/TreeCypress</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+            <shadowData>
+                <volume>(0.24, 0.4, 0.13)</volume>
+                <offset>(-0.03,0,-0.44)</offset>
+            </shadowData>
+            <shaderParameters>
+                <_FallColorSource>(0.373, 0.427, 0.313)</_FallColorSource>
+                <_FallTransitionRange>(0.02, 0.14)</_FallTransitionRange>
+            </shaderParameters>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/TreeCypress</uiIconPath>        
+        <statBases>
+            <Beauty>1</Beauty>
+        </statBases>
+        <plant>
+            <growDays>17.5</growDays>
+            <leaflessGraphicPath>alleZSoyez_AnyPlant/Leafless/TreeCypress</leaflessGraphicPath>
+            <harvestWork>2200</harvestWork>
+            <purpose>Beauty</purpose>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Bonsai</li>
+                <li>AnyPlant_Research_Swamp</li>
+            </sowResearchPrerequisites>
+            <visualSizeRange>
+                <min>0.6</min>
+                <max>1</max>
+            </visualSizeRange>
+        </plant>
+    </ThingDef>
+    <ThingDef ParentName="AnyPlant_DeciduousTreeBase">
+        <defName>AnyPlant_Plant_TreeMaple</defName>
+        <label>bonsai maple tree</label>
+        <description>A common medium-sized tree, easily identifiable by its distinct three-pointed leaf.</description>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/TreeMaple</texPath>
+            <graphicClass>Graphic_Random</graphicClass>
+            <shadowData>
+                <volume>(0.14, 0.32, 0.12)</volume>
+                <offset>(0,0,-0.44)</offset>
+            </shadowData>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/TreeMaple</uiIconPath> 
+        <statBases>
+            <Beauty>2</Beauty>
+        </statBases>
+        <plant>
+            <growDays>12.5</growDays>
+            <leaflessGraphicPath>alleZSoyez_AnyPlant/Leafless/TreeMaple</leaflessGraphicPath>
+            <harvestWork>700</harvestWork>
+            <purpose>Beauty</purpose>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Bonsai</li>
+                <li>AnyPlant_Research_Swamp</li>
+            </sowResearchPrerequisites>
+        </plant>
+    </ThingDef>
+    <!--======================AMBROSIA=======================-->
+    <ThingDef ParentName="AnyPlant_PlantBase">
+        <defName>AnyPlant_Plant_Ambrosia</defName>
+        <label>ambrosia bush</label>
+        <description>A rare wild bush which yields the ambrosia fruit. Ambrosia fruit is delicious and produces a drug-like mood boost. Ambrosia cannot be farmed, which makes wild ambrosia groves very valuable.\n\nIts rarity, beauty, and desirability are why ambrosia was named after the food of the ancient Greek gods.</description>
+        <statBases>
+            <MaxHitPoints>100</MaxHitPoints>
+            <Nutrition>0.35</Nutrition>
+        </statBases>
+        <graphicData>
+            <texPath>alleZSoyez_AnyPlant/Ambrosia/Ambrosia</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shadowData>
+                <volume>(0.1, 0.2, 0.1)</volume>
+            </shadowData>
+        </graphicData>
+        <uiIconPath>alleZSoyez_AnyPlant/UI/Ambrosia</uiIconPath>
+        <ingestible />
+        <plant>
+            <fertilitySensitivity>0.15</fertilitySensitivity>
+            <growDays>3</growDays>
+            <leaflessGraphicPath>alleZSoyez_AnyPlant/Ambrosia/Ambrosia_Leafless</leaflessGraphicPath>
+            <immatureGraphicPath>alleZSoyez_AnyPlant/Ambrosia/Ambrosia_Immature</immatureGraphicPath>
+            <harvestYield>2</harvestYield>
+            <harvestTag>Standard</harvestTag>
+            <harvestAfterGrowth>0.3</harvestAfterGrowth>
+            <harvestedThingDef>Ambrosia</harvestedThingDef>
+            <visualSizeRange>
+                <min>0.4</min>
+                <max>0.9</max>
+            </visualSizeRange>
+            <topWindExposure>0.1</topWindExposure>
+            <purpose>Food</purpose>
+            <sowTags>
+                <li>alleZSoyez_AnyPlant</li>
+            </sowTags>
+            <sowMinSkill>12</sowMinSkill>
+            <sowResearchPrerequisites>
+                <li>AnyPlant_Research_Ambrosia</li>
+            </sowResearchPrerequisites>
+        </plant>
+    </ThingDef>
+</Defs>

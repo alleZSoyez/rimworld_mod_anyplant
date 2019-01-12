@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+	<ResearchTabDef>
+		<defName>AnyPlant_Research_ResearchTab</defName>
+		<label>AnyPlant</label>
+	</ResearchTabDef>
+
+	<!--tier 1-->
+	<ResearchProjectDef>
+		<defName>AnyPlant_Research_Drainage</defName>
+		<tab>AnyPlant_Research_ResearchTab</tab>
+		<label>Soil drainage</label>
+		<description>While soil fertility is already something we know about, it's important to consider how easily the soil can rid itself of excess moisture. This is particularly important for potted plants, as they are susceptible to mold growth and root rot if allowed to soak for too long. While many decorative planters don't allow any sort of drainage, the AnyPlant Pot allows unneeded water to flow into a reservoir for later use. The rate of flow can be adjusted to suit the needs of a wide variety of plant life.</description>
+		<baseCost>1000</baseCost>
+		<techLevel>Neolithic</techLevel>
+		<researchViewX>0</researchViewX>
+		<researchViewY>2</researchViewY>
+	</ResearchProjectDef>
+
+	<!--tier 2-->
+	<ResearchProjectDef>
+		<defName>AnyPlant_Research_Hydrangea</defName>
+		<tab>AnyPlant_Research_ResearchTab</tab>
+		<label>Hydrangea sowing</label>
+		<description>A favorite teaching aid of science instructors on Earth is the hydrangea. By changing the pH of the soil, the flower can bloom in different colors. In addition to being a really neat science project, the hydrangea makes for a beautiful addition to any home.</description>
+		<baseCost>500</baseCost>
+		<techLevel>Medieval</techLevel>
+		<researchViewX>1</researchViewX>
+		<researchViewY>2</researchViewY>
+		<prerequisites>
+			<li>AnyPlant_Research_Drainage</li>
+		</prerequisites>
+	</ResearchProjectDef>
+	
+	<!--tier 3-->
+	<ResearchProjectDef>
+		<defName>AnyPlant_Research_CropMini</defName>
+		<tab>AnyPlant_Research_ResearchTab</tab>
+		<label>Crop miniaturization</label>
+		<description>Through selective breeding, we can create hybrids of crops that are better-suited for indoor life. While these new plants don't need as much light to thrive and are easier to protect from the elements, being constrained within a planter means they won't produce as large of a harvest.</description>
+		<baseCost>2000</baseCost>
+		<techLevel>Medieval</techLevel>
+		<researchViewX>2</researchViewX>
+		<researchViewY>2</researchViewY>
+		<prerequisites>
+			<li>AnyPlant_Research_Hydrangea</li>
+		</prerequisites>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<defName>AnyPlant_Research_Bonsai</defName>
+		<tab>AnyPlant_Research_ResearchTab</tab>
+		<label>Bonsai tree cultivation</label>
+		<description>Bonsai is the art of growing miniature trees that retain the shape and proportions of their full-sized counterparts. They can't be harvested for wood due to their size, but these living works of art add beauty to any space.</description>
+		<baseCost>3000</baseCost>
+		<techLevel>Medieval</techLevel>
+		<researchViewX>2</researchViewX>
+		<researchViewY>3</researchViewY>
+		<prerequisites>
+			<li>TreeSowing</li>
+			<li>AnyPlant_Research_CropMini</li>
+		</prerequisites>
+	</ResearchProjectDef>
+	
+	<!--tier 4-->
+	<ResearchProjectDef>
+		<defName>AnyPlant_Research_General</defName>
+		<tab>AnyPlant_Research_ResearchTab</tab>
+		<label>Beginner's botany</label>
+		<description>The next natural step is to begin cultivating some of the most commonly spotted wild plants.</description>
+		<baseCost>1000</baseCost>
+		<techLevel>Medieval</techLevel>
+		<researchViewX>3</researchViewX>
+		<researchViewY>2</researchViewY>
+		<prerequisites>
+			<li>AnyPlant_Research_CropMini</li>
+		</prerequisites>
+	</ResearchProjectDef>
+	
+	<!--tier 5-->
+	<ResearchProjectDef>
+		<defName>AnyPlant_Research_Temperate</defName>
+		<tab>AnyPlant_Research_ResearchTab</tab>
+		<label>Temperate taming</label>
+		<description>Knowing the preferences of common species makes it easy to guess what temperate plants need to thrive. Let's run some tests.</description>
+		<baseCost>1000</baseCost>
+		<techLevel>Industrial</techLevel>
+		<researchViewX>4</researchViewX>
+		<researchViewY>1</researchViewY>
+		<prerequisites>
+			<li>AnyPlant_Research_General</li>
+		</prerequisites>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<defName>AnyPlant_Research_Arid</defName>
+		<tab>AnyPlant_Research_ResearchTab</tab>
+		<label>Desert domestication</label>
+		<description>Let's see if we can cater to plants native to dry climates. Please resist the urge to water these plants like they're flowers. Resist it, I say!</description>
+		<baseCost>1000</baseCost>
+		<techLevel>Industrial</techLevel>
+		<researchViewX>4</researchViewX>
+		<researchViewY>3</researchViewY>
+		<prerequisites>
+			<li>AnyPlant_Research_General</li>
+		</prerequisites>
+	</ResearchProjectDef>
+	
+	<!--tier 6-->
+	<ResearchProjectDef>
+		<defName>AnyPlant_Research_Tropical</defName>
+		<tab>AnyPlant_Research_ResearchTab</tab>
+		<label>Tropical training</label>
+		<description>Tropical plants typically only survive in very warm climates with a lot of rainfall.</description>
+		<baseCost>1000</baseCost>
+		<techLevel>Industrial</techLevel>
+		<researchViewX>5</researchViewX>
+		<researchViewY>1</researchViewY>
+		<prerequisites>
+			<li>AnyPlant_Research_Temperate</li>
+		</prerequisites>
+	</ResearchProjectDef>
+	
+	<!--tier 7-->
+	<ResearchProjectDef>
+		<defName>AnyPlant_Research_Swamp</defName>
+		<tab>AnyPlant_Research_ResearchTab</tab>
+		<label>Swamp sowing</label>
+		<description>Testing the upper limits of the AnyPlant's water capacity, let's see how flora hailing from very wet regions will fare.</description>
+		<baseCost>1000</baseCost>
+		<techLevel>Industrial</techLevel>
+		<researchViewX>6</researchViewX>
+		<researchViewY>1</researchViewY>
+		<prerequisites>
+			<li>AnyPlant_Research_Tropical</li>
+		</prerequisites>
+	</ResearchProjectDef>
+
+	<!--tier 8-->
+	<ResearchProjectDef>
+		<defName>AnyPlant_Research_Cave</defName>
+		<tab>AnyPlant_Research_ResearchTab</tab>
+		<label>Cave cultivation</label>
+		<description>There exist unique and rarely seen plants that only grow in the shadows of the dankest caves. So, it can't be that hard to shove 'em in a pot and cultivate them, right?</description>
+		<baseCost>2000</baseCost>
+		<techLevel>Industrial</techLevel>
+		<researchViewX>7</researchViewX>
+		<researchViewY>1</researchViewY>
+		<prerequisites>
+			<li>AnyPlant_Research_Swamp</li>
+			<li>AnyPlant_Research_Arid</li>
+		</prerequisites>
+	</ResearchProjectDef>
+
+	<!--final-->	
+	<ResearchProjectDef>
+		<defName>AnyPlant_Research_Ambrosia</defName>
+		<tab>AnyPlant_Research_ResearchTab</tab>
+		<label>Ambrosia</label>
+		<description>Ambrosia is a very rare plant known to only sprout by chance. With much research and gene editing, we can finally cultivate it ourselves and enjoy its addictively sweet fruit anytime. While these ambrosia plants don't yield as much of a crop as their wild brethren and require a very skilled gardener to even get them to germinate, we believe these are sacrifices worth making.</description>
+		<baseCost>3000</baseCost>
+		<techLevel>Spacer</techLevel>
+		<researchViewX>8</researchViewX>
+		<researchViewY>3</researchViewY>
+		<prerequisites>
+			<li>AnyPlant_Research_Cave</li>
+			<li>AnyPlant_Research_Arid</li>
+		</prerequisites>
+	</ResearchProjectDef>
+
+
+</Defs>
