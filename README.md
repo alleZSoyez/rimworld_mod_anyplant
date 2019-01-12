@@ -1,5 +1,5 @@
 # AnyPlant
-Silly mod for Rimworld. Plant nearly any plant in the game in a pot.
+Silly mod for Rimworld. Grow nearly any plant in the game in a pot.
 
 Known bugs:
 
