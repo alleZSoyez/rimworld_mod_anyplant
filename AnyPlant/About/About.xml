@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ModMetaData>
-	<name>Potted AnyPlant</name>
+	<name>AnyPlant</name>
 	<author>alleZSoyez</author>
 	<targetVersion>1.0.2096</targetVersion>
-	<description>V1.0
-    Any plant can be a houseplant if you just believe.
+	<description>AnyPlant: Because two is never enough.
+This is my first mod ever. Please let me know if you find any issues.
+Special thanks to the fine folks at Ludeon Forums for helping me with some retexturing.
+
+FEATURES:
+- Grow nearly any plant that exists in vanilla Rimworld in a pot!
+- Custom plants! Cultivate beautiful hydrangeas in three different colors!
+- Decorate your colony with bonsai trees!
+- Fixed the problem in vanilla where potted roses grow outside the pot! (This fix also affects the vanilla plant pots.)
+- Plant crops inside all year round! They'll grow faster and with less light and are easier to protect from the elements. For balance, harvestable plants only produce half as many resources.
+- Even grow your own ambrosia!
+
+WARNINGS:
+- Do not add this mod to an existing save. It'll turn all your mineable slate into glowstool. I don't know why, and I don't know how to fix it.
+- I don't recommend removing this mod from a save either. If you want to try anyway, make sure you've deleted every plant pot on the map first (this mod also affects vanilla pots in order to fix the roses).
 		</description>
 </ModMetaData>
