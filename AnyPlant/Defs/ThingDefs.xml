@@ -1288,7 +1288,8 @@
     </ThingDef>
     <!--======================CAVE=======================-->
     <ThingDef ParentName="AnyPlant_CavePlantBase">
-        <defName>AnyPlant_Glowstool</defName>
+		<!-- for some reason "AnyPlant_Glowstool" is not a valid name. changing it fixed the slate to glowstool bug.-->
+        <defName>AnyPlant_Glowstool_is_not_a_rock</defName>
         <label>glowstool</label>
         <description>A small brown mushroom typically found in caves. It smells like an old, dirty rag pulled from the stomach of a rotting muffalo - but it tastes surprisingly good when cooked. Dies when exposed to light.</description>
         <statBases>
@@ -1333,6 +1334,7 @@
             </li>
         </comps>
     </ThingDef>
+    
     <ThingDef ParentName="AnyPlant_CavePlantBase">
         <defName>AnyPlant_Agarilux</defName>
         <label>agarilux</label>

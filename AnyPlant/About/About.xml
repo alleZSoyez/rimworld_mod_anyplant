@@ -6,7 +6,7 @@
 	<targetVersion>1.0.2096</targetVersion>
 	<description>AnyPlant: Because two is never enough.
 This is my first mod ever. Please let me know if you find any issues.
-Special thanks to the fine folks at Ludeon Forums for helping me with some retexturing.
+Special thanks to the fine folks at Ludeon Forums for helping me with some retexturing and for helping me fix that glowstool bug...
 
 FEATURES:
 - Grow nearly any plant that exists in vanilla Rimworld in a pot!
@@ -16,8 +16,12 @@ FEATURES:
 - Plant crops inside all year round! They'll grow faster and with less light and are easier to protect from the elements. For balance, harvestable plants only produce half as many resources.
 - Even grow your own ambrosia!
 
+In the interest of keeping the game balanced (especially early-game), research is required to unlock the pot as well as the various plants. Ambrosia is intended for long-term research. If you have any recommendations to better balance this mod, I'd love to hear them!
+
+This mod is not intended to replace the normal ways of growing crops outside/in hydroponic basins and should not be relied upon to feed a hungry colony. This is more of a novelty item and is better suited for mid-to-late game.
+
 WARNINGS:
-- Do not add this mod to an existing save. It'll turn all your mineable slate into glowstool. I don't know why, and I don't know how to fix it.
-- I don't recommend removing this mod from a save either. If you want to try anyway, make sure you've deleted every plant pot on the map first (this mod also affects vanilla pots in order to fix the roses).
+- I do not recommend adding this to a game in progress. Unexpected things might happen. If they do, please let me know about them.
+- I also do not recommend removing this mod from a save file. If you want to try anyway, make sure you've deleted every plant pot on the map first (this mod also affects vanilla pots in order to fix the roses).
 		</description>
 </ModMetaData>
