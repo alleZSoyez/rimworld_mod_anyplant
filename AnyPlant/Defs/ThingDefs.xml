@@ -187,7 +187,7 @@
         </graphicData>
     </ThingDef>
     <!--healroot base because of course this is a thing-->
-    <ThingDef ParentName="AnyPlant_PlantBase" Name="HealrootBase" Abstract="True">
+    <ThingDef ParentName="AnyPlant_PlantBase" Name="AnyPlant_HealrootBase" Abstract="True">
         <statBases>
             <MaxHitPoints>60</MaxHitPoints>
             <Nutrition>0.15</Nutrition>
