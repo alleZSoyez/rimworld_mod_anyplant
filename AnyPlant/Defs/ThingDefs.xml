@@ -911,7 +911,7 @@
                 <li>AnyPlant_Research_Temperate</li>
             </sowResearchPrerequisites>
             <topWindExposure>0.3</topWindExposure>
-            <purpose>Beauty</purpose>            
+            <purpose>Beauty</purpose>
         </plant>
     </ThingDef>
     <ThingDef ParentName="AnyPlant_PlantBase">
@@ -1127,7 +1127,7 @@
                 <li>AnyPlant_Research_Tropical</li>
             </sowResearchPrerequisites>
             <visualSizeRange>0.6~1.1</visualSizeRange>
-            <purpose>Beauty</purpose>            
+            <purpose>Beauty</purpose>
         </plant>
     </ThingDef>
     <ThingDef ParentName="AnyPlant_BushBase">
@@ -1232,7 +1232,7 @@
             </li>
         </comps>
     </ThingDef>
-    
+
     <ThingDef ParentName="AnyPlant_CavePlantBase">
         <defName>AnyPlant_Agarilux</defName>
         <label>agarilux</label>
@@ -1329,7 +1329,7 @@
                 <offset>(0,0,-0.38)</offset>
             </shadowData>
         </graphicData>
-        <uiIconPath>alleZSoyez_AnyPlant/UI/TreeCocoa</uiIconPath>        
+        <uiIconPath>alleZSoyez_AnyPlant/UI/TreeCocoa</uiIconPath>
         <statBases>
             <Beauty>2</Beauty>
             <Nutrition>1.25</Nutrition>
@@ -1369,7 +1369,7 @@
                 <offset>(-0.03,0,-0.44)</offset>
             </shadowData>
         </graphicData>
-        <uiIconPath>alleZSoyez_AnyPlant/UI/TreeOak</uiIconPath>  
+        <uiIconPath>alleZSoyez_AnyPlant/UI/TreeOak</uiIconPath>
         <statBases>
             <Beauty>2</Beauty>
         </statBases>
@@ -1459,7 +1459,7 @@
                 <offset>(-0.03,0,-0.44)</offset>
             </shadowData>
         </graphicData>
-        <uiIconPath>alleZSoyez_AnyPlant/UI/TreeBirch</uiIconPath>         
+        <uiIconPath>alleZSoyez_AnyPlant/UI/TreeBirch</uiIconPath>
         <statBases>
             <Beauty>2</Beauty>
             <Nutrition>1.25</Nutrition>
@@ -1496,7 +1496,7 @@
                 <offset>(0,0,-0.38)</offset>
             </shadowData>
         </graphicData>
-        <uiIconPath>alleZSoyez_AnyPlant/UI/SaguaroCactus</uiIconPath>       
+        <uiIconPath>alleZSoyez_AnyPlant/UI/SaguaroCactus</uiIconPath>
         <fillPercent>0.35</fillPercent>
         <plant>
             <lifespanDaysPerGrowDays>40</lifespanDaysPerGrowDays>
@@ -1565,7 +1565,7 @@
             <leaflessGraphicPath>alleZSoyez_AnyPlant/Leafless/TreeOak</leaflessGraphicPath>
             <harvestWork>1200</harvestWork>
             <purpose>Beauty</purpose>
-			<visualSizeRange>0.5~1.0</visualSizeRange>            
+			<visualSizeRange>0.5~1.0</visualSizeRange>
             <sowTags>
                 <li>alleZSoyez_AnyPlant</li>
             </sowTags>
@@ -1586,7 +1586,7 @@
                 <volume>(0.18, 0.3, 0.15)</volume>
             </shadowData>
         </graphicData>
-        <uiIconPath>alleZSoyez_AnyPlant/UI/TreeCecropia</uiIconPath>         
+        <uiIconPath>alleZSoyez_AnyPlant/UI/TreeCecropia</uiIconPath>
         <statBases>
             <Beauty>1</Beauty>
             <Nutrition>1.2</Nutrition>
@@ -1718,7 +1718,7 @@
                 <_FallTransitionRange>(0.02, 0.14)</_FallTransitionRange>
             </shaderParameters>
         </graphicData>
-        <uiIconPath>alleZSoyez_AnyPlant/UI/TreeCypress</uiIconPath>        
+        <uiIconPath>alleZSoyez_AnyPlant/UI/TreeCypress</uiIconPath>
         <statBases>
             <Beauty>1</Beauty>
         </statBases>
@@ -1749,7 +1749,7 @@
                 <offset>(0,0,-0.44)</offset>
             </shadowData>
         </graphicData>
-        <uiIconPath>alleZSoyez_AnyPlant/UI/TreeMaple</uiIconPath> 
+        <uiIconPath>alleZSoyez_AnyPlant/UI/TreeMaple</uiIconPath>
         <statBases>
             <Beauty>2</Beauty>
         </statBases>

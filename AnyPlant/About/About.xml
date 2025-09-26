@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ModMetaData>
-	<name>AnyPlant</name>
-	<author>alleZSoyez</author>
-	<supportedVersions>
+    <name>AnyPlant</name>
+    <author>alleZSoyez</author>
+    <supportedVersions>
         <li>1.0</li>
         <li>1.1</li>
-	<li>1.2</li>
-	<li>1.3</li>
-	<li>1.4</li>
+        <li>1.2</li>
+        <li>1.3</li>
+        <li>1.4</li>
         <li>1.5</li>
-	</supportedVersions>
-	<packageId>alleZSoyez.AnyPlant.AnyPlant</packageId>
-	<description>AnyPlant: Because two is never enough.
+        <li>1.6</li>
+    </supportedVersions>
+    <packageId>alleZSoyez.AnyPlant.AnyPlant</packageId>
+    <description>AnyPlant: Because two is never enough.
 This is my first mod ever. Please let me know if you find any issues.
 Special thanks to the fine folks at Ludeon Forums for helping me with some retexturing and for helping me fix that glowstool bug...
 Special thanks also to Karmapowered for pointing out an incompatibility with the healroot. Please let me know if the issues with that plant perist.
@@ -32,5 +33,5 @@ This mod is not intended to replace the normal ways of growing crops outside/in 
 WARNINGS:
 - I do not recommend adding this to a game in progress. Unexpected things might happen. If they do, please let me know about them.
 - I also do not recommend removing this mod from a save file. If you want to try anyway, make sure you've deleted every plant pot on the map first (this mod also affects vanilla pots in order to fix the roses).
-		</description>
+    </description>
 </ModMetaData>
